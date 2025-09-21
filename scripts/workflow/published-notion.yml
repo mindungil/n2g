@@ -4,7 +4,7 @@ on:
   schedule:
     # KST 00:00 = UTC 15:00 (전날)
     - cron: "0 15 * * *"
-  workflow_dispatch: {}   # 필요시 수동 실행
+  workflow_dispatch: {} # 필요시 수동 실행
 
 permissions:
   contents: write
@@ -37,11 +37,13 @@ jobs:
           POSTS_DIR: _posts
           ASSET_DIR: assets/img/for_post
           DOWNLOAD_COVER: "true"
-          # 한국어 필드명 매핑(노션 DB와 맞추세요)
+          # 한국어 필드명 매핑(노션 DB 컬럼명)
           TITLE_KEYS: "제목,Title,Name"
           DATE_PROP: "생성일"
           DEPLOY_PROP: "배포"
           TAG_PROP: "태그"
+          CATEGORY_PRIMARY_PROP: "카테고리" # 대분류(멀티 또는 셀렉트)
+          CATEGORY_SECONDARY_PROP: "분류" # 소분류(멀티 또는 셀렉트)
           # 카테고리/저자 등은 필요시 아래 스크립트 PROP 에서 조정
         run: node scripts/notion-sync.mjs
 
